@@ -7,6 +7,7 @@ typedef std::vector<std::pair<std::string,std::string> > PeopleType;
 typedef std::vector<std::string> FactType;
 
 void		ParseConfig	(std::ifstream &inconfig);
+void		SayHello	();
 PeopleType	GetPeople	(std::ifstream &inpeople);
 FactType	GetFacts	(std::ifstream &infacts);
 
@@ -14,6 +15,7 @@ int main(int argc, char *argv[])
 {
 	std::ifstream inconfig("factblaster.config");
 
+	SayHello();
 	if (inconfig==NULL)
 	{
 		std::cout<<"ERROR: Missing config file!\n";
@@ -36,6 +38,23 @@ void ParseConfig(std::ifstream &inconfig)
 		if (inconfig.eof()) {break;}
 	}
 	return;
+}
+
+void SayHello()
+{
+	std::cout<<"      ___      ___          ___                                         ___          ___                 ___          ___     \n";
+	std::cout<<"     /  /\\    /  /\\        /  /\\        ___    _____                   /  /\\        /  /\\        ___    /  /\\        /  /\\    \n";
+	std::cout<<"    /  /:/_  /  /::\\      /  /:/       /  /\\  /  /::\\                 /  /::\\      /  /:/_      /  /\\  /  /:/_      /  /::\\   \n";
+	std::cout<<"   /  /:/ /\\/  /:/\\:\\    /  /:/       /  /:/ /  /:/\\:\\  ___     ___  /  /:/\\:\\    /  /:/ /\\    /  /:/ /  /:/ /\\    /  /:/\\:\\  \n";
+	std::cout<<"  /  /:/ /:/  /:/~/::\\  /  /:/  ___  /  /:/ /  /:/~/::\\/__/\\   /  /\\/  /:/~/::\\  /  /:/ /::\\  /  /:/ /  /:/ /:/_  /  /:/~/:/  \n";
+	std::cout<<" /__/:/ /:/__/:/ /:/\\:\\/__/:/  /  /\\/  /::\\/__/:/ /:/\\:\\  \\:\\ /  /:/__/:/ /:/\\:\\/__/:/ /:/\\:\\/  /::\\/__/:/ /:/ /\\/__/:/ /:/___\n";
+	std::cout<<" \\  \\:\\/:/\\  \\:\\/:/__\\/\\  \\:\\ /  /:/__/:/\\:\\  \\:\\/:/~/:/\\  \\:\\  /:/\\  \\:\\/:/__\\/\\  \\:\\/:/~/:/__/:/\\:\\  \\:\\/:/ /:/\\  \\:\\/:::::/\n";
+	std::cout<<"  \\  \\::/  \\  \\::/      \\  \\:\\  /:/\\__\\/  \\:\\  \\::/ /:/  \\  \\:\\/:/  \\  \\::/      \\  \\::/ /:/\\__\\/  \\:\\  \\::/ /:/  \\  \\::/~~~~ \n";
+	std::cout<<"   \\  \\:\\   \\  \\:\\       \\  \\:\\/:/      \\  \\:\\  \\:\\/:/    \\  \\::/    \\  \\:\\       \\__\\/ /:/      \\  \\:\\  \\:\\/:/    \\  \\:\\     \n";
+	std::cout<<"    \\  \\:\\   \\  \\:\\       \\  \\::/        \\__\\/\\  \\::/      \\__\\/      \\  \\:\\        /__/:/        \\__\\/\\  \\::/      \\  \\:\\    \n";
+	std::cout<<"     \\__\\/    \\__\\/        \\__\\/               \\__\\/                   \\__\\/        \\__\\/               \\__\\/        \\__\\/    \n";
+	std::cout<<"Developed mostly during HACK(RPI); Fall 2014 as a whimsical project.\n";
+	std::cout<<"Code by Kienan Knight-Boehm (kienankb.com), ASCII art by an awesome website I can't remember right now.\n";
 }
 
 PeopleType GetPeople(std::ifstream &inpeople)
