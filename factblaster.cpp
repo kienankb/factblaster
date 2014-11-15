@@ -15,11 +15,8 @@ void		FireMessage	(std::string message, std::string address);
 int main(int argc, char *argv[])
 {
 	std::ifstream inconfig("factblaster.config");
-
 	SayHello();
-	std::string tmpnumber;
-	std::cin>>tmpnumber;
-	FireMessage("TEST",tmpnumber);
+	std::cout<<"Looking for config file..."
 	if (inconfig==NULL)
 	{
 		std::cout<<"ERROR: Missing config file!\n";
@@ -27,6 +24,7 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
+		std::cout<<"done!\n";
 		ParseConfig(inconfig);
 	}
 	return 0;
@@ -38,7 +36,28 @@ void ParseConfig(std::ifstream &inconfig)
 	while (true)
 	{
 		std::getline(inconfig,tmp);
+		if (tmp.substr(0,8)=="factfile")
+		{
+			std::cout<<"Looking for facts file...";
+			std::ifstream infacts(tmp.substr(9,std::string::npos));
+			if (infacts==NULL)
+			{
+				std::cout<<"Error finding file!\n";
+				exit(1);
+			}
+			else
+			{
+				GetFacts(infacts);
+			}
+		}
+		else if (tmp.substr(0,)=="namesfile")
+		{
 
+		}
+		else
+		{
+
+		}
 		if (inconfig.eof()) {break;}
 	}
 	return;
@@ -93,6 +112,8 @@ FactType GetFacts(std::ifstream &infacts)
 
 void FireMessage(std::string message, std::string address)
 {
+	std::string fact = "Did you know? "+message+" Reply STOP to cancel.";
 	std::string commandstring = "echo \"Did you know? "+message+" Reply STOP to cancel.\" | mail "+address;
 	system(commandstring.c_str());
+	system(("echo "+fact+" | festival --tts"));
 }
