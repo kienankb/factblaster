@@ -10,12 +10,16 @@ void		ParseConfig	(std::ifstream &inconfig);
 void		SayHello	();
 PeopleType	GetPeople	(std::ifstream &inpeople);
 FactType	GetFacts	(std::ifstream &infacts);
+void		FireMessage	(std::string message, std::string address);
 
 int main(int argc, char *argv[])
 {
 	std::ifstream inconfig("factblaster.config");
 
 	SayHello();
+	std::string tmpnumber;
+	std::cin>>tmpnumber;
+	FireMessage("TEST",tmpnumber);
 	if (inconfig==NULL)
 	{
 		std::cout<<"ERROR: Missing config file!\n";
@@ -85,4 +89,10 @@ FactType GetFacts(std::ifstream &infacts)
 		tmp.clear();
 	}
 	return result;
+}
+
+void FireMessage(std::string message, std::string address)
+{
+	std::string commandstring = "echo \"Did you know? "+message+" Reply STOP to cancel.\" | mail "+address;
+	system(commandstring.c_str());
 }
