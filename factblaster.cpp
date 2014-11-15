@@ -32,6 +32,7 @@ void ParseConfig(std::ifstream &inconfig)
 	while (true)
 	{
 		std::getline(inconfig,tmp);
+
 		if (inconfig.eof()) {break;}
 	}
 	return;
