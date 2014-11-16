@@ -6,7 +6,7 @@
 typedef std::vector<std::pair<std::string,std::string> > PeopleType;
 typedef std::vector<std::string> FactType;
 
-void		ParseConfig	(std::ifstream &inconfig);
+void		ParseConfig	(std::ifstream &inconfig, PeopleType &people, FactType &facts);
 void		SayHello	();
 PeopleType	GetPeople	(std::ifstream &inpeople);
 FactType	GetFacts	(std::ifstream &infacts);
@@ -14,6 +14,8 @@ void		FireMessage	(std::string message, std::string address);
 
 int main(int argc, char *argv[])
 {
+	PeopleType people;
+	FactType facts;
 	std::ifstream inconfig("factblaster.config");
 	SayHello();
 	std::cout<<"Looking for config file...";
@@ -25,12 +27,12 @@ int main(int argc, char *argv[])
 	else
 	{
 		std::cout<<"done!\n";
-		ParseConfig(inconfig);
+		ParseConfig(inconfig, people, facts);
 	}
 	return 0;
 }
 
-void ParseConfig(std::ifstream &inconfig)
+void ParseConfig(std::ifstream &inconfig, PeopleType &people, FactType &facts)
 {
 	std::string tmp;
 	while (true)
@@ -47,16 +49,24 @@ void ParseConfig(std::ifstream &inconfig)
 			}
 			else
 			{
-				GetFacts(infacts);
+				std::cout<<"done!\n";
+				facts = GetFacts(infacts);
 			}
 		}
 		else if (tmp.substr(0,9)=="namesfile")
 		{
-
-		}
-		else
-		{
-
+			std::cout<<"Looking for people file...";
+			std::ifstream inpeople(tmp.substr(10,std::string::npos).c_str());
+			if (inpeople==NULL)
+			{
+				std::cout<<"Error finding file!\n";
+				exit(1);
+			}
+			else
+			{
+				std::cout<<"done!\n";
+				people = GetPeople(inpeople);
+			}
 		}
 		if (inconfig.eof()) {break;}
 	}
