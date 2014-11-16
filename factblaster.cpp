@@ -11,6 +11,7 @@ void		SayHello	();
 PeopleType	GetPeople	(std::ifstream &inpeople);
 FactType	GetFacts	(std::ifstream &infacts);
 void		FireMessage	(std::string message, std::string address);
+int			GetOption	();
 
 int main(int argc, char *argv[])
 {
@@ -28,6 +29,33 @@ int main(int argc, char *argv[])
 	{
 		std::cout<<"done!\n";
 		ParseConfig(inconfig, people, facts);
+	}
+	int choice;
+	while (1)
+	{
+		choice = GetOption();
+		switch (choice)
+		{
+			case 1:
+				// Do something
+				break;
+			case 2:
+				// Do something
+				break;
+			case 3:
+				// Do something
+				break;
+			case 4:
+				// Do something
+				break;
+			case 5:
+				// Do something
+				break;
+			case 6:
+				exit(1);
+			default:
+				std::cout<<"What?\n";
+		}
 	}
 	return 0;
 }
@@ -126,4 +154,17 @@ void FireMessage(std::string message, std::string address)
 	std::string commandstring = "echo \"Did you know? "+message+" Reply STOP to cancel.\" | mail "+address;
 	system(commandstring.c_str());
 	system(("echo "+fact+" | festival --tts").c_str());
+}
+
+int GetOption()
+{
+	int choice;
+	std::cout<<"1.\tPick a one-time victim\n";
+	std::cout<<"2.\tHear a fact\n";
+	std::cout<<"3.\tAutopilot\n";
+	std::cout<<"4.\tAdd a victim\n";
+	std::cout<<"5.\tAdd a fact\n";
+	std::cout<<"6.\tQuit\n";
+	std::cin>>choice;
+	return choice;
 }
