@@ -3,6 +3,8 @@
 #include <vector>
 #include <cstdlib>
 #include <time.h>
+#include <utility>
+#include <stdlib.h>
 
 typedef std::vector<std::pair<std::string,std::string> > PeopleType;
 typedef std::vector<std::string> FactType;
@@ -38,6 +40,7 @@ int main(int argc, char *argv[])
 	{
 		choice = GetOption();
 		int random = rand()%facts.size();
+		std::cout<<random<<std::endl;
 		switch (choice)
 		{
 			case 1:
