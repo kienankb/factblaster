@@ -37,13 +37,14 @@ int main(int argc, char *argv[])
 	while (1)
 	{
 		choice = GetOption();
+		int random = rand()%facts.size();
 		switch (choice)
 		{
 			case 1:
 				// Do something
 				break;
 			case 2:
-				PlayFact(facts[rand()%facts.size()]);
+				PlayFact(facts[random]);
 				break;
 			case 3:
 				// Do something
@@ -177,5 +178,6 @@ void PlayFact(std::string fact)
 {
 	std::string command = "echo \"Did you know? "+fact+" \" | festival --tts";
 	system(command.c_str());
+	std::cout<<fact<<std::endl;
 	return;
 }
