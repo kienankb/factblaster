@@ -36,14 +36,11 @@ int main(int argc, char *argv[])
 		ParseConfig(inconfig, people, facts);
 	}
 	int choice, random;
+	int fsize = facts.size();
 	while (1)
 	{
 		choice = GetOption();
-		do
-		{
-			random = rand();
-		} while (random>=facts.size());
-		std::cout<<facts.size()<<"\n";
+		random = rand()%fsize;
 		switch (choice)
 		{
 			case 1:
