@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 	while (1)
 	{
 		choice = GetOption();
-		int random = rand()%facts.size();
+		int random = rand();
 		std::cout<<random<<std::endl;
 		switch (choice)
 		{
