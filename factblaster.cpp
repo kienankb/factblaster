@@ -40,14 +40,13 @@ int main(int argc, char *argv[])
 	{
 		choice = GetOption();
 		int random = rand();
-		std::cout<<random<<std::endl;
 		switch (choice)
 		{
 			case 1:
 				// Do something
 				break;
 			case 2:
-				PlayFact(facts[random]);
+				PlayFact(facts[random%facts.size()]);
 				break;
 			case 3:
 				// Do something
