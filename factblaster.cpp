@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 	while (1)
 	{
 		choice = GetOption();
-		random = rand()%fsize;
+		random = rand()%facts.size();
 		switch (choice)
 		{
 			case 1:
