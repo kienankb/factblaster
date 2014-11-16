@@ -2,6 +2,7 @@
 #include <fstream>
 #include <vector>
 #include <cstdlib>
+#include <time.h>
 
 typedef std::vector<std::pair<std::string,std::string> > PeopleType;
 typedef std::vector<std::string> FactType;
@@ -12,9 +13,11 @@ PeopleType	GetPeople	(std::ifstream &inpeople);
 FactType	GetFacts	(std::ifstream &infacts);
 void		FireMessage	(std::string message, std::string address);
 int			GetOption	();
+void		PlayFact(std::string fact);
 
 int main(int argc, char *argv[])
 {
+	srand(time(NULL));
 	PeopleType people;
 	FactType facts;
 	std::ifstream inconfig("factblaster.config");
@@ -40,7 +43,7 @@ int main(int argc, char *argv[])
 				// Do something
 				break;
 			case 2:
-				// Do something
+				PlayFact(facts[rand()%facts.size()]);
 				break;
 			case 3:
 				// Do something
@@ -154,6 +157,7 @@ void FireMessage(std::string message, std::string address)
 	std::string commandstring = "echo \"Did you know? "+message+" Reply STOP to cancel.\" | mail "+address;
 	system(commandstring.c_str());
 	system(("echo "+fact+" | festival --tts").c_str());
+	return;
 }
 
 int GetOption()
@@ -167,4 +171,11 @@ int GetOption()
 	std::cout<<"6.\tQuit\n";
 	std::cin>>choice;
 	return choice;
+}
+
+void PlayFact(std::string fact)
+{
+	std::string command = "echo \"Did you know? "+fact+" \" | festival --tts";
+	system(command.c_str());
+	return;
 }
