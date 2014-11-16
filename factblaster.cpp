@@ -35,18 +35,22 @@ int main(int argc, char *argv[])
 		std::cout<<"done!\n";
 		ParseConfig(inconfig, people, facts);
 	}
-	int choice;
+	int choice, random;
 	while (1)
 	{
 		choice = GetOption();
-		int random = rand();
+		do
+		{
+			random = rand();
+		} while (random>=facts.size());
+		std::cout<<facts.size()<<"\n";
 		switch (choice)
 		{
 			case 1:
 				// Do something
 				break;
 			case 2:
-				PlayFact(facts[random%facts.size()]);
+				PlayFact(facts[random]);
 				break;
 			case 3:
 				// Do something
