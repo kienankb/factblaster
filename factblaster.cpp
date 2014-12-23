@@ -127,8 +127,10 @@ void SayHello()
 	std::cout<<"   \\  \\:\\   \\  \\:\\       \\  \\:\\/:/      \\  \\:\\  \\:\\/:/    \\  \\::/    \\  \\:\\       \\__\\/ /:/      \\  \\:\\  \\:\\/:/    \\  \\:\\     \n";
 	std::cout<<"    \\  \\:\\   \\  \\:\\       \\  \\::/        \\__\\/\\  \\::/      \\__\\/      \\  \\:\\        /__/:/        \\__\\/\\  \\::/      \\  \\:\\    \n";
 	std::cout<<"     \\__\\/    \\__\\/        \\__\\/               \\__\\/                   \\__\\/        \\__\\/               \\__\\/        \\__\\/    \n";
-	std::cout<<"Developed mostly during HACK(RPI); Fall 2014 as a whimsical project.\n";
-	std::cout<<"Code by Kienan Knight-Boehm (kienankb.com), ASCII art by an awesome website I can't remember right now.\n";
+	std::cout<<"\n";
+	std::cout<<"Version 1.0\n";
+	std::cout<<"Developed mostly during HACK(RPI); Fall 2014 as a whimsical but vengeful project.\n";
+	std::cout<<"Code by Kienan Knight-Boehm (kienankb.com), ASCII art by http://patorjk.com/software/taag/\n\n";
 }
 
 PeopleType GetPeople(std::ifstream &inpeople)

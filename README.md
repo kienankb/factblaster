@@ -20,7 +20,7 @@ factfile:facts.txt
 namesfile:names.txt
 ```
 
-where facts.txt is just a text file with a fact on each line and names.text has a name on a line and the address below.  For example:
+where facts.txt is just a text file with a fact on each line and names.txt has a name on a line and the address below.  For example:
 
 ```
 Jane Doe
