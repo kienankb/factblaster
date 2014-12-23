@@ -16,7 +16,9 @@ FactType	GetFacts	(std::ifstream &infacts);
 void		FireMessage	(std::string message, std::string address);
 int			GetOption	();
 void		PlayFact	(std::string fact);
-void		SingleShot	()
+void		SingleShot	();
+void		ListPeople	(PeopleType &people);
+void		ListFacts	();
 
 int main(int argc, char *argv[])
 {
@@ -58,7 +60,7 @@ int main(int argc, char *argv[])
 				// Do something
 				break;
 			case 5:
-				// Do something
+				ListPeople(people);
 				break;
 			case 6:
 				exit(1);
@@ -171,12 +173,13 @@ void FireMessage(std::string message, std::string address)
 int GetOption()
 {
 	int choice;
+	std::cout<<"\n";
 	std::cout<<"1.\tPick a one-time victim\n";
 	std::cout<<"2.\tHear a fact\n";
 	std::cout<<"3.\tAutopilot\n";
 	std::cout<<"4.\tList facts\n";
 	std::cout<<"5.\tList targets\n";
-	std::cout<<"6.\tQuit\n";
+	std::cout<<"6.\tQuit\n\n";
 	std::cin>>choice;
 	return choice;
 }
@@ -187,4 +190,18 @@ void PlayFact(std::string fact)
 	system(command.c_str());
 	std::cout<<fact<<std::endl;
 	return;
+}
+
+void SingleShot()
+{
+	/* code */
+}
+
+void ListPeople(PeopleType &people)
+{
+	std::cout<<"\tHere be yer targets, cap'n:\n\n";
+	for(size_t i = 0; i < people.size(); i++)
+	{
+		std::cout<<i<<":\t"<<people[i].first<<": "<<people[i].second<<"\n";
+	}
 }
