@@ -16,7 +16,7 @@ FactType	GetFacts	(std::ifstream &infacts);
 void		FireMessage	(std::string message, std::string address);
 int			GetOption	();
 void		PlayFact	(std::string fact);
-void		SingleShot	();
+void		SingleShot	(FactType &facts, PeopleType &people, int random);
 void		ListPeople	(PeopleType &people);
 void		ListFacts	(FactType &facts);
 
@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
 		switch (choice)
 		{
 			case 1:
-				// Do something
+				SingleShot(facts, people, random);
 				break;
 			case 2:
 				PlayFact(facts[random]);
@@ -166,7 +166,7 @@ void FireMessage(std::string message, std::string address)
 	std::string fact = "Did you know? "+message+" Reply STOP to cancel.";
 	std::string commandstring = "echo \"Did you know? "+message+" Reply STOP to cancel.\" | mail "+address;
 	system(commandstring.c_str());
-	system(("echo "+fact+" | festival --tts").c_str());
+	//system(("echo "+fact+" | festival --tts").c_str());
 	return;
 }
 
@@ -192,9 +192,29 @@ void PlayFact(std::string fact)
 	return;
 }
 
-void SingleShot()
+void SingleShot(FactType &facts, PeopleType &people, int random)
 {
-	/* code */
+	int targetchoice;
+	char sure;
+	ListPeople(people);
+	std::cout<<"Choose one!\n";
+	std::cin>>targetchoice;
+	if (targetchoice < 0 || targetchoice >= people.size())
+	{
+		std::cout<<"Invalid.\n";
+		return;
+	}
+	std::cout<<"Sending to "<<people[targetchoice].first<<".  Ya sure? (y/n)\n";
+	std::cin>>sure;
+	if(sure=='y')
+	{
+		FireMessage(facts[random],people[targetchoice].second);
+		std::cout<<"Sent.\n";
+	}
+	else
+	{
+		std::cout<<"Nevermind, cancelled.\n";
+	}
 }
 
 void ListPeople(PeopleType &people)
