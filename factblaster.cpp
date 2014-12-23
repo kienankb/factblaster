@@ -15,7 +15,8 @@ PeopleType	GetPeople	(std::ifstream &inpeople);
 FactType	GetFacts	(std::ifstream &infacts);
 void		FireMessage	(std::string message, std::string address);
 int			GetOption	();
-void		PlayFact(std::string fact);
+void		PlayFact	(std::string fact);
+void		SingleShot	()
 
 int main(int argc, char *argv[])
 {
@@ -35,6 +36,7 @@ int main(int argc, char *argv[])
 		std::cout<<"done!\n";
 		ParseConfig(inconfig, people, facts);
 	}
+	inconfig.close();
 	int choice, random;
 	int fsize = facts.size();
 	while (1)
@@ -87,6 +89,7 @@ void ParseConfig(std::ifstream &inconfig, PeopleType &people, FactType &facts)
 				std::cout<<"done!\n";
 				facts = GetFacts(infacts);
 			}
+			infacts.close();
 		}
 		else if (tmp.substr(0,9)=="namesfile")
 		{
@@ -102,6 +105,7 @@ void ParseConfig(std::ifstream &inconfig, PeopleType &people, FactType &facts)
 				std::cout<<"done!\n";
 				people = GetPeople(inpeople);
 			}
+			inpeople.close();
 		}
 		if (inconfig.eof()) {break;}
 	}
@@ -170,8 +174,8 @@ int GetOption()
 	std::cout<<"1.\tPick a one-time victim\n";
 	std::cout<<"2.\tHear a fact\n";
 	std::cout<<"3.\tAutopilot\n";
-	std::cout<<"4.\tAdd a victim\n";
-	std::cout<<"5.\tAdd a fact\n";
+	std::cout<<"4.\tList facts\n";
+	std::cout<<"5.\tList targets\n";
 	std::cout<<"6.\tQuit\n";
 	std::cin>>choice;
 	return choice;
