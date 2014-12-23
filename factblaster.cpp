@@ -18,7 +18,7 @@ int			GetOption	();
 void		PlayFact	(std::string fact);
 void		SingleShot	();
 void		ListPeople	(PeopleType &people);
-void		ListFacts	();
+void		ListFacts	(FactType &facts);
 
 int main(int argc, char *argv[])
 {
@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 				// Do something
 				break;
 			case 4:
-				// Do something
+				ListFacts(facts);
 				break;
 			case 5:
 				ListPeople(people);
@@ -203,5 +203,15 @@ void ListPeople(PeopleType &people)
 	for(size_t i = 0; i < people.size(); i++)
 	{
 		std::cout<<i<<":\t"<<people[i].first<<": "<<people[i].second<<"\n";
+	}
+}
+
+
+void ListFacts (FactType &facts)
+{
+	std::cout<<"\tHere's your ammunition, cap'n:\n\n";
+	for(size_t i = 0; i < facts.size(); i++)
+	{
+		std::cout<<facts[i]<<"\n";
 	}
 }
