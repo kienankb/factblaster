@@ -5,6 +5,7 @@
 #include <time.h>
 #include <utility>
 #include <stdlib.h>
+#include <unistd.h>
 
 typedef std::vector<std::pair<std::string,std::string> > PeopleType;
 typedef std::vector<std::string> FactType;
@@ -19,6 +20,7 @@ void		PlayFact	(std::string fact);
 void		SingleShot	(FactType &facts, PeopleType &people, int random);
 void		ListPeople	(PeopleType &people);
 void		ListFacts	(FactType &facts);
+void		Schedule	(PeopleType &people, FactType &facts);
 
 int main(int argc, char *argv[])
 {
@@ -54,7 +56,7 @@ int main(int argc, char *argv[])
 				PlayFact(facts[random]);
 				break;
 			case 3:
-				// Do something
+				Schedule(people, facts);
 				break;
 			case 4:
 				ListFacts(facts);
@@ -229,11 +231,48 @@ void ListPeople(PeopleType &people)
 }
 
 
-void ListFacts (FactType &facts)
+void ListFacts(FactType &facts)
 {
 	std::cout<<"\tHere's your ammunition, cap'n:\n\n";
 	for(size_t i = 0; i < facts.size(); i++)
 	{
 		std::cout<<facts[i]<<"\n";
+	}
+}
+
+void Schedule (PeopleType &people, FactType &facts)
+{
+	int targetchoice, interval, max;
+	char confirm;
+	std::cout<<"So you want me to do the work for you, huh?  Alright.\n";
+	std::cout<<"Here are your targets.\n";
+	ListPeople(people);
+	std::cout<<"Choose one: ";
+	std::cin>>targetchoice;
+	if (targetchoice < 0 || targetchoice >= people.size())
+	{
+		std::cout<<"Invalid choice, knucklehead.\n";
+		return;
+	}
+	std::cout<<"Sending facts to "<<people[targetchoice].first<<".\n";
+	std::cout<<"How many minutes should elapse between blasts?";
+	std::cin>>interval;
+	std::cout<<"How many facts total?";
+	std::cin>>max;
+	std::cout<<"To recap: every "<<interval<<" minutes, send a random fact to "<<people[targetchoice].first<<" until "<<max<<" facts have been sent.\n";
+	std::cout<<"Confirm? (y/n) ";
+	std::cin>>confirm;
+	if (confirm != 'y')
+	{
+		return;
+	}
+	std::cout<<"Here we go!\n";
+	int msgnum = 0;
+	while (msgnum<max)
+	{
+		FireMessage(facts[rand()%facts.size()],people[targetchoice].second);
+		std::cout<<"Sent message "<<msgnum+1<<" of "<<max<<".  Now waiting for "<<interval<<" minutes.\n";
+		msgnum++;
+		sleep(60*interval);
 	}
 }
