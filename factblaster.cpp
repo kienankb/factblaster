@@ -130,9 +130,11 @@ void SayHello()
 	std::cout<<"    \\  \\:\\   \\  \\:\\       \\  \\::/        \\__\\/\\  \\::/      \\__\\/      \\  \\:\\        /__/:/        \\__\\/\\  \\::/      \\  \\:\\    \n";
 	std::cout<<"     \\__\\/    \\__\\/        \\__\\/               \\__\\/                   \\__\\/        \\__\\/               \\__\\/        \\__\\/    \n";
 	std::cout<<"\n";
-	std::cout<<"Version 1.0\n";
-	std::cout<<"Developed mostly during HACK(RPI); Fall 2014 as a whimsical but vengeful project.\n";
-	std::cout<<"Code by Kienan Knight-Boehm (kienankb.com), ASCII art by http://patorjk.com/software/taag/\n\n";
+	std::cout<<"Version 0.1 BETAAAA\n";
+	std::cout<<"Developed partly during HACK(RPI); Fall 2014 as a whimsical but vengeful project.\n";
+	std::cout<<"Developed mostly after HACK(RPI); Fall 2014 as an equally vengeful project.\n";
+	std::cout<<"Code by Kienan Knight-Boehm (kienankb.com), ASCII art by http://patorjk.com/software/taag/\n";
+	std::cout<<"Special thanks to Josh Goldberg for testing.\n\n";
 }
 
 PeopleType GetPeople(std::ifstream &inpeople)
@@ -213,29 +215,20 @@ void SingleShot(FactType &facts, PeopleType &people, int random)
 		FireMessage(facts[random],people[targetchoice].second);
 		std::cout<<"Sent.\n";
 	}
-	else
-	{
-		std::cout<<"Nevermind, cancelled.\n";
-	}
+	else { std::cout<<"Nevermind, cancelled.\n"; }
 }
 
 void ListPeople(PeopleType &people)
 {
 	std::cout<<"\tHere be yer targets, cap'n:\n\n";
-	for(size_t i = 0; i < people.size(); i++)
-	{
-		std::cout<<i<<":\t"<<people[i].first<<": "<<people[i].second<<"\n";
-	}
+	for(size_t i = 0; i < people.size(); i++) { std::cout<<i<<":\t"<<people[i].first<<": "<<people[i].second<<"\n"; }
 }
 
 
 void ListFacts(FactType &facts)
 {
 	std::cout<<"\tHere's your ammunition, cap'n:\n\n";
-	for(size_t i = 0; i < facts.size(); i++)
-	{
-		std::cout<<facts[i]<<"\n";
-	}
+	for(size_t i = 0; i < facts.size(); i++) { std::cout<<facts[i]<<"\n"; }
 }
 
 void Schedule (PeopleType &people, FactType &facts)
@@ -260,10 +253,7 @@ void Schedule (PeopleType &people, FactType &facts)
 	std::cout<<"To recap: every "<<interval<<" minutes, send a random fact to "<<people[targetchoice].first<<" until "<<max<<" facts have been sent.\n";
 	std::cout<<"Confirm? (y/n) ";
 	std::cin>>confirm;
-	if (confirm != 'y')
-	{
-		return;
-	}
+	if (confirm != 'y') { return; }
 	std::cout<<"Here we go!\n";
 	int msgnum = 0;
 	while (msgnum<max)
