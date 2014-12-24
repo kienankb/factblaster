@@ -167,10 +167,8 @@ FactType GetFacts(std::ifstream &infacts)
 
 void FireMessage(std::string message, std::string address)
 {
-	std::string fact = "Did you know? "+message+" Reply STOP to cancel.";
-	std::string commandstring = "echo \"Did you know? "+message+" Reply STOP to cancel.\" | mail "+address;
+	std::string commandstring = "echo \"Did you know? "+message+" Reply STOP to cancel.\" | mail -a \"From: FunFactsHomeEdition\" "+address;
 	system(commandstring.c_str());
-	//system(("echo "+fact+" | festival --tts").c_str());
 	return;
 }
 
