@@ -10,7 +10,6 @@
 typedef std::vector<std::pair<std::string,std::string> > PeopleType;
 typedef std::vector<std::string> FactType;
 
-void		ParseConfig	(std::ifstream &inconfig, PeopleType &people, FactType &facts);
 void		SayHello	();
 PeopleType	GetPeople	(std::string peoplefile);
 FactType	GetFacts	(std::string factsfile);
@@ -24,7 +23,7 @@ void		Schedule	(PeopleType &people, FactType &facts);
 
 int main(int argc, char *argv[])
 {
-	srand(time(NULL));
+	srand(time(NULL));									// Set up randomization, people, facts, etc.
 	PeopleType people;
 	FactType facts;
 	SayHello();
@@ -32,7 +31,7 @@ int main(int argc, char *argv[])
 	people = GetPeople("people.txt");
 	int choice, random;
 	int fsize = facts.size();
-	while (1)
+	while (1)											// Main loop w/choices
 	{
 		choice = GetOption();
 		random = rand()%facts.size();
@@ -83,6 +82,11 @@ void SayHello()
 	std::cout<<"Special thanks to Josh Goldberg for testing.\n\n";
 }
 
+//
+// FUNCTION:
+//	Load in the list of people and numbers/address from the
+//	given file, returning the proper container.
+//
 PeopleType GetPeople(std::string peoplefile)
 {
 	std::cout<<"Looking for people file "<<peoplefile<<"...\n";
@@ -105,6 +109,11 @@ PeopleType GetPeople(std::string peoplefile)
 	return result;
 }
 
+//
+// FUNCTION:
+//	Load in the list of facts from the given file, returning
+//	the proper container.
+//
 FactType GetFacts(std::string factsfile)
 {
 	std::cout<<"Looking for facts file "<<factsfile<<"...\n";
@@ -125,6 +134,10 @@ FactType GetFacts(std::string factsfile)
 	return result;
 }
 
+//
+// FUNCTION:
+//	Does the dirty work of actually firing off a message.
+//
 void FireMessage(std::string message, std::string address)
 {
 	std::string commandstring = "echo \"Did you know? "+message+" Reply STOP to cancel.\" | mail -a \"From: FunFactsHomeEdition\" "+address;
@@ -146,6 +159,11 @@ int GetOption()
 	return choice;
 }
 
+//
+// FUNCTION:
+//	Really specific TTS stuff, I'll probably wipe this out
+//	at some point
+//
 void PlayFact(std::string fact)
 {
 	std::string command = "echo \"Did you know? "+fact+" \" | festival --tts";
@@ -154,6 +172,10 @@ void PlayFact(std::string fact)
 	return;
 }
 
+//
+// FUNCTION:
+//	Fire a one-time shot to a victim.
+//
 void SingleShot(FactType &facts, PeopleType &people, int random)
 {
 	int targetchoice;
@@ -189,6 +211,10 @@ void ListFacts(FactType &facts)
 	for(size_t i = 0; i < facts.size(); i++) { std::cout<<facts[i]<<"\n"; }
 }
 
+//
+// FUNCTION:
+//	More advanced scheduling for fact blasting.
+//
 void Schedule (PeopleType &people, FactType &facts)
 {
 	int targetchoice, interval, max;
@@ -219,6 +245,9 @@ void Schedule (PeopleType &people, FactType &facts)
 		FireMessage(facts[rand()%facts.size()],people[targetchoice].second);
 		std::cout<<"Sent message "<<msgnum+1<<" of "<<max<<".  Now waiting for "<<interval<<" minutes.\n";
 		msgnum++;
+		if (msgnum==max) {
+			break;
+		}
 		sleep(60*interval);
 	}
 }
