@@ -76,7 +76,7 @@ void SayHello()
 	std::cout<<"    \\  \\:\\   \\  \\:\\       \\  \\::/        \\__\\/\\  \\::/      \\__\\/      \\  \\:\\        /__/:/        \\__\\/\\  \\::/      \\  \\:\\    \n";
 	std::cout<<"     \\__\\/    \\__\\/        \\__\\/               \\__\\/                   \\__\\/        \\__\\/               \\__\\/        \\__\\/    \n";
 	std::cout<<"\n";
-	std::cout<<"Version 0.1 BETAAAA\n";
+	std::cout<<"Version 0.2 BETAAAA\n";
 	std::cout<<"Developed partly during HACK(RPI); Fall 2014 as a whimsical but vengeful project.\n";
 	std::cout<<"Developed mostly after HACK(RPI); Fall 2014 as an equally vengeful project.  Tad less whimsical, maybe.\n";
 	std::cout<<"Code by Kienan Knight-Boehm (kienankb.com), ASCII art by http://patorjk.com/software/taag/\n";

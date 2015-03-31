@@ -36,20 +36,13 @@ And `/etc/ssmtp/revaliases`:
 
 ##Program Setup
 
-Run make to build it; you'll need GCC/G++ obviously.  Then create the file `factblaster.config` in the same directory and add two lines:
-```
-factfile:facts.txt
-namesfile:names.txt
-```
-`facts.txt` and `names.txt` will be the list of facts and names/addresses, respectively.  `facts.txt` should simply have one fact per line, and `names.txt` should be of the format:
+I've done a little bit of reworking how the program loads info, and I'll probably continue to do so.  For now, no more mucking about with config files.  Run make (with g++ installed) to build.  Make two files in the same directory: `people.txt` and `facts.txt` (the list of facts and names/addresses, respectively).  `facts.txt` should simply have one fact per line, and `names.txt` should be of the format:
 ```
 Jane Doe
 0123456789@vtext.com
 John Smith
 9876543210@txt.att.net
 ```
-for example.  Name on one line, address on the next.  If you know the carrier, you can just look up the gateway email address format for it; if not you can use a free website to do the lookup for you.  I'm working on adding carrier determination to the program.
-
-As I said, in future releases the program will do much more for you; I'm considering storing things with JSON, creating command-line argument options, etc.  But for now:
+Name on one line, address on the next.  If you know the carrier, you can just look up the gateway email address format for it; if not you can use a free website to do the lookup for you.  I'm working on adding carrier determination to the program, but for now:
 
 Have fun.  And don't be a jerk.
