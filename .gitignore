@@ -32,3 +32,5 @@
 *.facts
 *.names
 *.old
+facts.txt
+people.txt
