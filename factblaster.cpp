@@ -12,8 +12,8 @@ typedef std::vector<std::string> FactType;
 
 void		ParseConfig	(std::ifstream &inconfig, PeopleType &people, FactType &facts);
 void		SayHello	();
-PeopleType	GetPeople	(std::ifstream &inpeople);
-FactType	GetFacts	(std::ifstream &infacts);
+PeopleType	GetPeople	(std::string peoplefile);
+FactType	GetFacts	(std::string factsfile);
 void		FireMessage	(std::string message, std::string address);
 int			GetOption	();
 void		PlayFact	(std::string fact);
@@ -27,20 +27,9 @@ int main(int argc, char *argv[])
 	srand(time(NULL));
 	PeopleType people;
 	FactType facts;
-	std::ifstream inconfig("factblaster.config");
 	SayHello();
-	std::cout<<"Looking for config file...";
-	if (inconfig==NULL)
-	{
-		std::cout<<"ERROR: Missing config file!\n";
-		exit(1);
-	}
-	else
-	{
-		std::cout<<"done!\n";
-		ParseConfig(inconfig, people, facts);
-	}
-	inconfig.close();
+	facts = GetFacts("facts.txt");
+	people = GetPeople("people.txt");
 	int choice, random;
 	int fsize = facts.size();
 	while (1)
@@ -73,49 +62,6 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
-void ParseConfig(std::ifstream &inconfig, PeopleType &people, FactType &facts)
-{
-	std::string tmp;
-	while (true)
-	{
-		std::getline(inconfig,tmp);
-		if (tmp.substr(0,8)=="factfile")
-		{
-			std::cout<<"Looking for facts file...";
-			std::ifstream infacts(tmp.substr(9,std::string::npos).c_str());
-			if (infacts==NULL)
-			{
-				std::cout<<"Error finding file!\n";
-				exit(1);
-			}
-			else
-			{
-				std::cout<<"done!\n";
-				facts = GetFacts(infacts);
-			}
-			infacts.close();
-		}
-		else if (tmp.substr(0,9)=="namesfile")
-		{
-			std::cout<<"Looking for people file...";
-			std::ifstream inpeople(tmp.substr(10,std::string::npos).c_str());
-			if (inpeople==NULL)
-			{
-				std::cout<<"Error finding file!\n";
-				exit(1);
-			}
-			else
-			{
-				std::cout<<"done!\n";
-				people = GetPeople(inpeople);
-			}
-			inpeople.close();
-		}
-		if (inconfig.eof()) {break;}
-	}
-	return;
-}
-
 void SayHello()
 {
 	std::cout<<"      ___      ___          ___                                         ___          ___                 ___          ___     \n";
@@ -132,13 +78,19 @@ void SayHello()
 	std::cout<<"\n";
 	std::cout<<"Version 0.1 BETAAAA\n";
 	std::cout<<"Developed partly during HACK(RPI); Fall 2014 as a whimsical but vengeful project.\n";
-	std::cout<<"Developed mostly after HACK(RPI); Fall 2014 as an equally vengeful project.\n";
+	std::cout<<"Developed mostly after HACK(RPI); Fall 2014 as an equally vengeful project.  Tad less whimsical, maybe.\n";
 	std::cout<<"Code by Kienan Knight-Boehm (kienankb.com), ASCII art by http://patorjk.com/software/taag/\n";
 	std::cout<<"Special thanks to Josh Goldberg for testing.\n\n";
 }
 
-PeopleType GetPeople(std::ifstream &inpeople)
+PeopleType GetPeople(std::string peoplefile)
 {
+	std::cout<<"Looking for people file "<<peoplefile<<"...\n";
+	std::ifstream inpeople(peoplefile.c_str());
+	if (inpeople == NULL) {
+		std::cerr<<"SAM JACKSON CAN'T FIND YOUR MUTHAF**KIN' PEOPLE FILE!\n";
+		exit(1);
+	}
 	PeopleType result;
 	std::string tmp, tmpname, tmpaddress;
 	while (true)
@@ -153,8 +105,14 @@ PeopleType GetPeople(std::ifstream &inpeople)
 	return result;
 }
 
-FactType GetFacts(std::ifstream &infacts)
+FactType GetFacts(std::string factsfile)
 {
+	std::cout<<"Looking for facts file "<<factsfile<<"...\n";
+	std::ifstream infacts(factsfile.c_str());
+	if (infacts == NULL) {
+		std::cerr<<"Find your facts file, Yoda can not.\n";
+		exit(1);
+	}
 	FactType result;
 	std::string tmp;
 	while (true)
