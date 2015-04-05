@@ -20,6 +20,7 @@ void		SingleShot	(FactType &facts, PeopleType &people, int random);
 void		ListPeople	(PeopleType &people);
 void		ListFacts	(FactType &facts);
 void		Schedule	(PeopleType &people, FactType &facts);
+void		WriteData	(PeopleType &people, FactType &facts);
 
 int main(int argc, char *argv[])
 {
@@ -53,7 +54,14 @@ int main(int argc, char *argv[])
 				ListPeople(people);
 				break;
 			case 6:
-				exit(1);
+				// AddFact fn
+				break;
+			case 7:
+				// AddTarget fn;
+				break;
+			case 8:
+				WriteData(people, facts);
+				exit(0);
 			default:
 				std::cout<<"What?\n";
 		}
@@ -106,6 +114,7 @@ PeopleType GetPeople(std::string peoplefile)
 		tmpaddress = tmp;
 		result.push_back(std::make_pair(tmpname,tmpaddress));
 	}
+	inpeople.close();
 	return result;
 }
 
@@ -131,6 +140,7 @@ FactType GetFacts(std::string factsfile)
 		result.push_back(tmp);
 		tmp.clear();
 	}
+	infacts.close();
 	return result;
 }
 
@@ -154,7 +164,9 @@ int GetOption()
 	std::cout<<"3.\tAutopilot\n";
 	std::cout<<"4.\tList facts\n";
 	std::cout<<"5.\tList targets\n";
-	std::cout<<"6.\tQuit\n\n";
+	std::cout<<"6.\tAdd fact\n";
+	std::cout<<"7.\tAdd target\n";
+	std::cout<<"8.\tQuit\n\n";
 	std::cin>>choice;
 	return choice;
 }
@@ -215,6 +227,7 @@ void ListFacts(FactType &facts)
 // FUNCTION:
 //	More advanced scheduling for fact blasting.
 //
+
 void Schedule (PeopleType &people, FactType &facts)
 {
 	int targetchoice, interval, max;
@@ -250,4 +263,24 @@ void Schedule (PeopleType &people, FactType &facts)
 		}
 		sleep(60*interval);
 	}
+}
+
+void WriteData(PeopleType &people, FactType &facts)
+{
+	std::cout<<"Rewriting fact and target files...\n";
+	std::ofstream outpeople("people.txt");
+	std::ofstream outfacts("facts.txt");
+	if (outpeople == 0 || outfacts == NULL) {
+		std::cerr<<"Error writing data files!\n";
+		exit(1);
+	}
+	for (size_t i = 0; i < people.size(); i++) {
+		outpeople<<people[i].first<<"\n";
+		outpeople<<people[i].second<<"\n";
+	}
+	outpeople.close();
+	for (size_t i = 0; i < facts.size(); i++) {
+		outfacts<<facts[i]<<"\n";
+	}
+	outfacts.close();
 }
