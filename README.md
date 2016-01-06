@@ -14,7 +14,7 @@ As stated above, most carriers have an email-to-SMS gateway.  In other words, if
 
 ##SSMTP
 
-First thing's first: you'll need an email account from which to send email.  I used a throwaway Gmail account.  Next, Install SSMTP on your machine.  Edit the following config files:
+First thing's first: you'll need an email account from which to send email.  I used a throwaway Gmail account.  Next, Install SSMTP on your machine.  If, after compiling FactBlaster, you get a message saying something like `mail: command not found`, install mailutils as well.  Edit the following config files:
 
 `/etc/ssmtp/ssmtp.conf`:
 ```
@@ -33,6 +33,8 @@ And `/etc/ssmtp/revaliases`:
 <username that can send mail>:<email address>:<email smtp server>
 ```
 (add a line like that for each user you want to run it as)
+
+If mail returns with an error exit code, you may have to have Gmail allow access to "less secure apps".  Buncha prudes.
 
 ##Program Setup
 
