@@ -14,7 +14,7 @@ void		SayHello	();
 PeopleType	GetPeople	(std::string peoplefile);
 FactType	GetFacts	(std::string factsfile);
 void		FireMessage	(std::string message, std::string address);
-int			GetOption	();
+int		GetOption	();
 void		PlayFact	(std::string fact);
 void		SingleShot	(FactType &facts, PeopleType &people, int random);
 void		ListPeople	(PeopleType &people);
@@ -24,7 +24,8 @@ void		WriteData	(PeopleType &people, FactType &facts);
 
 int main(int argc, char *argv[])
 {
-	srand(time(NULL));									// Set up randomization, people, facts, etc.
+	// Set up randomization, people, facts, etc.
+	srand(time(NULL));
 	PeopleType people;
 	FactType facts;
 	SayHello();
@@ -32,7 +33,9 @@ int main(int argc, char *argv[])
 	people = GetPeople("people.txt");
 	int choice, random;
 	int fsize = facts.size();
-	while (1)											// Main loop w/choices
+	
+	// Main loop w/choices
+	while (1)
 	{
 		choice = GetOption();
 		random = rand()%facts.size();
@@ -81,7 +84,7 @@ void SayHello()
 	std::cout<<"Developed partly during HACK(RPI); Fall 2014 as a whimsical but vengeful project.\n";
 	std::cout<<"Developed mostly after HACK(RPI); Fall 2014 as an equally vengeful project.  Tad less whimsical, maybe.\n";
 	std::cout<<"Code by Kienan Knight-Boehm (kienankb.com), ASCII art by http://patorjk.com/software/taag/\n";
-	std::cout<<"Special thanks to Josh Goldberg for testing.\n\n";
+	std::cout<<"Special thanks to Joshypoo Goldberg for testing.\n\n";
 }
 
 //
